@@ -1,0 +1,2 @@
+# simpeg
+sistem informasi pegawai
