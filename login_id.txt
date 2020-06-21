@@ -1,0 +1,8 @@
+admin : admin@admin.com
+pass : 123456
+
+operator: op@simpeg.com
+pass : asdzxc
+
+staff sample : files.yadi@gmail.com
+pass : asdzxc
