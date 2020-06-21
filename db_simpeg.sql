@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `tb_menu` (
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `create_at` timestamp NOT NULL,
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table db_simpeg.tb_menu: ~13 rows (approximately)
 /*!40000 ALTER TABLE `tb_menu` DISABLE KEYS */;
@@ -115,7 +115,9 @@ INSERT INTO `tb_menu` (`menu_id`, `title`, `url`, `icon`, `is_main_menu`, `is_ac
 	(11, 'Data Master', '', 'fa fa-cubes', 0, 1, '2020-06-03 07:49:20'),
 	(12, 'Data Pegawai', 'pegawai', '', 11, 1, '2020-06-03 07:57:45'),
 	(13, 'SKP', 'skp', 'fa fa-area-chart', 0, 1, '2020-06-03 09:15:49'),
-	(14, 'Tugas', 'tugas', 'fa fa-file-text', 0, 1, '2020-06-03 11:41:40');
+	(14, 'Kirim Tugas', 'tugas', 'fa fa-edit', 0, 1, '2020-06-03 11:41:40'),
+	(15, 'Laporan Tugas', 'report_task', 'fe fe-file-text', 0, 1, '2020-06-18 12:59:27'),
+	(16, 'SKP Pegawai', 'skp_report', 'fe fe-users', 0, 1, '2020-06-19 11:46:26');
 /*!40000 ALTER TABLE `tb_menu` ENABLE KEYS */;
 
 -- Dumping structure for table db_simpeg.tb_roles
@@ -142,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `tb_role_permission` (
   `role_id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table db_simpeg.tb_role_permission: ~23 rows (approximately)
 /*!40000 ALTER TABLE `tb_role_permission` DISABLE KEYS */;
@@ -166,11 +168,11 @@ INSERT INTO `tb_role_permission` (`id`, `role_id`, `menu_id`) VALUES
 	(37, 2, 11),
 	(38, 3, 1),
 	(39, 3, 9),
-	(40, 3, 3),
-	(41, 3, 2),
-	(42, 3, 5),
 	(43, 3, 13),
-	(44, 3, 14);
+	(44, 3, 14),
+	(46, 2, 4),
+	(47, 2, 16),
+	(48, 2, 15);
 /*!40000 ALTER TABLE `tb_role_permission` ENABLE KEYS */;
 
 -- Dumping structure for table db_simpeg.tb_setting
@@ -205,27 +207,65 @@ CREATE TABLE IF NOT EXISTS `tb_skp` (
 -- Dumping data for table db_simpeg.tb_skp: ~3 rows (approximately)
 /*!40000 ALTER TABLE `tb_skp` DISABLE KEYS */;
 INSERT INTO `tb_skp` (`skp_id`, `user_id`, `kegiatan`, `kuantitas`, `satuan`, `kualitas`, `waktu`, `create_at`, `status`, `month`) VALUES
-	(1, 3, 'test1', '4', 'dokumen', 100, 30, '2020-05-03 16:07:59', 0, 'Juni'),
+	(1, 3, 'test1', '4', 'dokumen', 100, 30, '2020-06-02 16:07:59', 0, 'Juni'),
 	(2, 3, 'test 2', '4', 'lembar', 100, 14, '2020-06-03 11:30:15', 0, 'Juni');
 /*!40000 ALTER TABLE `tb_skp` ENABLE KEYS */;
 
 -- Dumping structure for table db_simpeg.tb_tugas_skp
 CREATE TABLE IF NOT EXISTS `tb_tugas_skp` (
-  `id_tugas_skp` int(11) NOT NULL,
+  `id_tugas_skp` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `skp_id` int(11) NOT NULL,
   `tgl_pengerjaan` date NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
   `output` varchar(100) DEFAULT NULL,
-  `dokumen` varchar(200) DEFAULT '',
+  `satuan` varchar(200) DEFAULT '',
+  `file` varchar(200) DEFAULT '',
   `create_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_tugas_skp`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table db_simpeg.tb_tugas_skp: ~0 rows (approximately)
+-- Dumping data for table db_simpeg.tb_tugas_skp: ~9 rows (approximately)
 /*!40000 ALTER TABLE `tb_tugas_skp` DISABLE KEYS */;
+INSERT INTO `tb_tugas_skp` (`id_tugas_skp`, `user_id`, `skp_id`, `tgl_pengerjaan`, `start_time`, `end_time`, `output`, `satuan`, `file`, `create_at`) VALUES
+	(1, 3, 1, '2020-06-10', '16:39:00', '18:39:00', '3', 'dokumen', '', '2020-06-09 16:39:47'),
+	(2, 3, 2, '2020-06-09', '17:00:00', '19:59:00', '4', 'lembar', 'none', '2020-06-09 18:00:13'),
+	(3, 3, 1, '2020-06-09', '17:00:00', '19:59:00', '4', 'dokumen', 'ada', '2020-06-09 18:00:34'),
+	(4, 3, 1, '2020-06-09', '18:14:00', '20:14:00', '1', 'dokumen', 'none', '2020-06-09 18:15:01'),
+	(5, 3, 2, '2020-06-09', '18:16:00', '20:16:00', '1', 'lembar', 'none', '2020-06-09 18:16:32'),
+	(6, 3, 1, '2020-06-16', '18:18:00', '20:18:00', '2', 'dokumen', 'no-file', '2020-06-09 18:19:12'),
+	(7, 3, 2, '2020-06-11', '18:23:00', '20:23:00', '3', 'lembar', 'no-file', '2020-06-09 18:23:58'),
+	(8, 3, 2, '2020-06-08', '18:24:00', '19:24:00', '3', 'lembar', NULL, '2020-06-09 18:24:39'),
+	(9, 3, 2, '2020-06-08', '18:24:00', '19:24:00', '3', 'lembar', NULL, '2020-06-09 18:25:15'),
+	(10, 3, 2, '2020-06-16', '18:25:00', '20:25:00', '3', 'lembar', NULL, '2020-06-09 18:25:45'),
+	(11, 3, 1, '2020-06-11', '18:39:00', '22:37:00', '5', 'dokumen', 'no-file', '2020-06-09 18:38:02'),
+	(12, 3, 1, '2020-06-18', '19:54:00', '20:54:00', '4', 'dokumen', 'no-file', '2020-06-18 19:54:51'),
+	(13, 3, 2, '2020-06-19', '19:55:00', '20:55:00', '3', 'lembar', 'dispensasi.docx', '2020-06-18 19:55:25');
 /*!40000 ALTER TABLE `tb_tugas_skp` ENABLE KEYS */;
+
+-- Dumping structure for table db_simpeg.tb_tugas_tambahan
+CREATE TABLE IF NOT EXISTS `tb_tugas_tambahan` (
+  `id_tambahan` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `kegiatan` varchar(200) DEFAULT NULL,
+  `waktu_mulai` time DEFAULT NULL,
+  `waktu_selesai` time DEFAULT NULL,
+  `output` varchar(50) DEFAULT NULL,
+  `volume` varchar(100) DEFAULT NULL,
+  `satuan` varchar(100) DEFAULT NULL,
+  `pemberi_tugas` varchar(200) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `file` text,
+  `create_at` timestamp NOT NULL,
+  PRIMARY KEY (`id_tambahan`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table db_simpeg.tb_tugas_tambahan: ~0 rows (approximately)
+/*!40000 ALTER TABLE `tb_tugas_tambahan` DISABLE KEYS */;
+INSERT INTO `tb_tugas_tambahan` (`id_tambahan`, `user_id`, `kegiatan`, `waktu_mulai`, `waktu_selesai`, `output`, `volume`, `satuan`, `pemberi_tugas`, `tanggal`, `file`, `create_at`) VALUES
+	(1, 3, 'Test3', '17:43:00', '19:43:00', '4', '1', 'dokumen', 'Lurah', '2020-06-19', 'Tugas_harian_file-Dokumen.docx', '2020-06-19 17:43:37');
+/*!40000 ALTER TABLE `tb_tugas_tambahan` ENABLE KEYS */;
 
 -- Dumping structure for table db_simpeg.tb_users
 CREATE TABLE IF NOT EXISTS `tb_users` (
@@ -255,9 +295,9 @@ CREATE TABLE IF NOT EXISTS `tb_users` (
 -- Dumping data for table db_simpeg.tb_users: ~2 rows (approximately)
 /*!40000 ALTER TABLE `tb_users` DISABLE KEYS */;
 INSERT INTO `tb_users` (`user_id`, `role_id`, `email`, `password`, `nip`, `nik`, `last_login`, `create_at`, `update_at`, `banned`, `display_name`, `active`, `phone`, `full_name`, `born_date`, `images`, `id_jabatan`, `deleted`, `gender`, `address`) VALUES
-	(1, 1, 'admin@admin.com', '$2y$04$bs8yZWigc.fKFBm1sXwJWO2Y1JOhwBtDttXWpzRl67ZpeTc3cbMXS', '1300016056', '2143213213123213', '2020-06-03 16:13:21', '2020-05-06 18:02:21', '2020-05-09 10:00:56', 0, 'admin', 1, '085727651561', 'admin admininstrator', '2020-05-04', 'profile_admin.jpg', 0, 0, 'L', 'Bantul, Yogyakarta'),
-	(2, 2, 'op@simpeg.com', '$2y$04$aZ8ewfpDTKzZFegB.JybSeWcCsFfbj3qALJRkZgnS1x.bPiOZcSe6', '1300016058', '12345678', '2020-06-03 14:56:55', '2020-05-09 09:42:48', '2020-06-01 07:14:18', 0, 'Operator', 1, '087665566111', 'Operator', '1975-05-07', 'profile_operator.png', 0, 0, 'L', 'Jogjakarta'),
-	(3, 3, 'files.yadi@gmail.com', '$2y$04$et6tyWaZgWE1.fikcruuoehVix2x5g7wSiL7KC6Lxd0kFllOypw6i', '1300016058', NULL, '2020-06-04 19:07:56', '2020-06-03 08:00:35', NULL, 0, 'Dwi', 1, NULL, 'Dwi Nurhadi', '1996-06-03', 'user.png', 10, 0, NULL, NULL);
+	(1, 1, 'admin@admin.com', '$2y$04$bs8yZWigc.fKFBm1sXwJWO2Y1JOhwBtDttXWpzRl67ZpeTc3cbMXS', '1300016056', '34083912839121', '2020-06-19 18:31:14', '2020-05-06 18:02:21', '2020-05-09 10:00:56', 0, 'admin', 1, '085727651561', 'admin admininstrator', '2020-05-04', 'profile_admin.jpg', 0, 0, 'L', 'Bantul, Yogyakarta'),
+	(2, 2, 'op@simpeg.com', '$2y$04$aZ8ewfpDTKzZFegB.JybSeWcCsFfbj3qALJRkZgnS1x.bPiOZcSe6', '1300016058', '12345678', '2020-06-21 17:29:45', '2020-05-09 09:42:48', '2020-06-01 07:14:18', 0, 'Operator', 1, '087665566111', 'Operator', '1975-05-07', 'profile_operator.png', 0, 0, 'L', 'Jogjakarta'),
+	(3, 3, 'files.yadi@gmail.com', '$2y$04$et6tyWaZgWE1.fikcruuoehVix2x5g7wSiL7KC6Lxd0kFllOypw6i', '1300016058', NULL, '2020-06-19 18:53:20', '2020-06-03 08:00:35', NULL, 0, 'Dwi', 1, NULL, 'Dwi Nurhadi', '1996-06-03', 'user.png', 10, 0, NULL, NULL);
 /*!40000 ALTER TABLE `tb_users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
