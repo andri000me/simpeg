@@ -52,3 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+#custom routes
+$route['task_incoming_daily'] = 'report/task_come/daily';
+$route['task_incoming_daily/approve/(:any)'] = 'report/task_come/approve/$1';

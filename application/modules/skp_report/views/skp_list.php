@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="rable-reposive">
+                            <div class="table-reposive">
                                 <table class="table card-table text-nowrap datatable">
                                     <thead>
                                         <tr>

@@ -92,6 +92,20 @@ if( !function_exists('string_is_aktif')){
     }
 }
 
+if( !function_exists('format_date')){
+    function format_date($tanggal)
+    {
+        $ubah = gmdate($tanggal, time() + 60 * 60 * 8);
+        $pecah = explode("-", $ubah);
+        $bln = bulan($pecah[1]);
+        $tgl = $pecah[2];
+        $thn = $pecah[0];
+    
+        return $tgl.'-'.$bln.'-'.$thn;
+    }
+
+}
+
 if( !function_exists('month')){
     function month($tanggal)
     {
