@@ -58,29 +58,18 @@
 
                             <div class="row sectionRow">
                                 <div class="col-sm-2">
-                                    <div>Durasi</div>
+                                    <div>Waktu</div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="input-group mb-3">
                                     <input type="number" class="form-control" id="waktu" name="waktu" value="<?=$formdata['waktu']?>" aria-label="Waktu" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2">
-                                                hari
+                                                Bulan
                                             </span>
                                         </div>
                                     </div>
                                     <span style="color:red;" class="waktu"></span>
-                                </div>
-                            </div>
-                            <div class="boxDivider"></div>
-
-                            <div class="row sectionRow">
-                                <div class="col-sm-2">
-                                    <div>Bulan</div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <input type="text" name="bulan" value="<?=$formdata['bulan']?>" class="form-control" required>
-                                    <span style="color:red;" class="bulan"></span>
                                 </div>
                             </div>
                             <div class="boxDivider"></div>

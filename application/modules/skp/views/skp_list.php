@@ -12,7 +12,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"><?=$c_judul?></h3>
+                    <h3 class="card-title"><?=$c_judul.' Bulan '.bulan(date('m')).' '.date('Y') ?></h3>
                     <div class="card-options">
                         <a href="<?php echo base_url('skp/create')?>" class="btn btn-primary">Create</a>
                     </div>
@@ -23,11 +23,10 @@
                             <thead>
                                 <tr>
                                     <th width="2%">No</th>
-                                    <th width="10%">Kegiatan</th>
-                                    <th width="10%">Kuantitas</th>
-                                    <th width="10%">Satuan</th>
-                                    <th width="10%">Kualitas Mutu</th>
-                                    <th width="10%">Durasi</th>
+                                    <th width="40%">Kegiatan Tugas Jabatan</th>
+                                    <th width="10%">Kuantitas/ Output</th>
+                                    <th width="10%">Kualitas/ Mutu</th>
+                                    <th width="10%">Waktu</th>
                                     <th width="10%">Aksi</th>
                                 </tr>
                             </thead>
@@ -38,10 +37,9 @@
                                 <tr>
                                     <td><?=$i++?></td>
                                     <td><?=$skp['kegiatan']?></td>
-                                    <td><?=$skp['kuantitas']?></td>
-                                    <td><?=$skp['satuan']?></td>
+                                    <td><?=$skp['kuantitas'].' '.$skp['satuan']?></td>
                                     <td><?=$skp['kualitas']?></td>
-                                    <td><?=$skp['waktu']?></td>
+                                    <td><?=$skp['waktu'].' Bulan'?></td>
                                     <td>
                                     <?php if($skp['status'] === '0'){ ?>
                                         <a href="<?php echo base_url('skp/create/').$skp['skp_id'] ?>" class="btn btn-info"><i class="fe fe-edit"></i> Edit</a>

@@ -35,7 +35,6 @@ class Skp extends MY_Controller {
                 $formdata['kualitas'] = $skpdata['kualitas'];
                 $formdata['satuan'] = $skpdata['satuan'];
                 $formdata['waktu'] = $skpdata['waktu'];
-                $formdata['bulan'] = $skpdata['month'];
             }else{
                 $this->session->set_flashdata('message', 'invalid id not found');
 				redirect('skp');
@@ -47,7 +46,6 @@ class Skp extends MY_Controller {
             $formdata['satuan'] = "";
             $formdata['kualitas'] = "";
             $formdata['waktu'] = "";
-            $formdata['bulan'] = "";
         }
         
         $data = configs('Create/Edit data SKP');
@@ -71,7 +69,6 @@ class Skp extends MY_Controller {
                 $error['satuan'] = form_error('satuan');
                 $error['kualitas'] = form_error('kualitas');
                 $error['waktu'] = form_error('waktu');
-                $error['bulan'] = form_error('bulan');
 
                 $response['status'] = 0;
                 $response['error'] = $error;
@@ -85,7 +82,6 @@ class Skp extends MY_Controller {
                     $error['satuan'] = "";
                     $error['kualitas'] = "";
                     $error['waktu'] = "";
-                    $error['bulan'] = "";
 
                     $response['status'] = 1;
                     $response['message'] = 'Successfuly! data has saved to database';

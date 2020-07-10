@@ -56,3 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 #custom routes
 $route['task_incoming_daily'] = 'report/task_come/daily';
 $route['task_incoming_daily/approve/(:any)'] = 'report/task_come/approve/$1';
+$route['task_skp_report'] = 'report/report_task_skp/index';
+
+$route['send_task'] = 'tugas/tugas_harian/index';
+$route['send_task/saving'] = 'tugas/tugas_harian/saving';

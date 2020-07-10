@@ -11,6 +11,12 @@ class Skp_model extends CI_Model
 
     public function getSkp($user_id)
     {
+        $bln = date('m');
+        $thn = date('Y');
+        $start = $thn.'-'.$bln.'-01';
+        $end = $thn.'-'.$bln.'-31';
+        $where = ['skp.tanggal >=' => $start, 'skp.tanggal <=' => $end ];
+
         $this->db->select('
                         skp.*
                         ,tu.full_name
@@ -18,18 +24,19 @@ class Skp_model extends CI_Model
         $this->db->from('tb_skp skp');
         $this->db->join('tb_users tu', 'skp.user_id = tu.user_id');
         $this->db->where('skp.user_id = '.$user_id.' ');
+        $this->db->where($where);
         return $this->db->get()->result_array();
     }
 
     public function getSkpById($params)
     {
         date_default_timezone_set('ASIA/JAKARTA');
-        $month = bulan(date('m'));
+        $month = date('Y-m');
 
         $this->db->select('skp.*');
         $this->db->from('tb_skp skp');
         $this->db->join('tb_users tu', 'skp.user_id=tu.user_id');
-        $this->db->where('skp.user_id ='.$this->id.' AND skp_id = '.$params.' AND month = "'.$month.'" ');
+        $this->db->where('skp.user_id ='.$this->id.' AND skp_id = '.$params.' ');
         return $this->db->get();
     }
 
@@ -47,25 +54,20 @@ class Skp_model extends CI_Model
                 'label' => 'Kuantitas (Output)',
             ),
             array(
-                'field' => 'kualitas',
-                'rules' => 'trim|required',
-                'label' => 'Kualitas (Mutu)',
-            ),
-            array(
                 'field' => 'satuan',
                 'rules' => 'trim|required',
                 'label' => 'Satuan',
             ),
             array(
-                'field' => 'waktu',
+                'field' => 'kualitas',
                 'rules' => 'trim|required',
-                'label' => 'Durasi',
+                'label' => 'Kualitas (Mutu)',
             ),
             array(
-                'field' => 'bulan',
+                'field' => 'waktu',
                 'rules' => 'trim|required',
-                'label' => 'Bulan',
-            ),
+                'label' => 'Waktu',
+            )
         );
     }
 
@@ -73,15 +75,15 @@ class Skp_model extends CI_Model
     {
         $params_insert['kegiatan'] = $params['kegiatan'];
         $params_insert['kuantitas'] = $params['kuantitas'];
-        $params_insert['kualitas'] = $params['kualitas'];
         $params_insert['satuan'] = $params['satuan'];
+        $params_insert['kualitas'] = $params['kualitas'];
         $params_insert['waktu'] = $params['waktu'];
-        $params_insert['month'] = ucwords($params['bulan']);
         $params_insert['user_id'] = $this->id;
 
         if(empty($params['skp_id']))
         {
             $params_insert['create_at'] = date('Y-m-d H:i:s');
+            $params_insert['tanggal'] = date('Y-m-d');
             $insert = $this->db->insert('tb_skp', $params_insert);
             $skp_id = $this->db->insert_id();
             return $skp_id;

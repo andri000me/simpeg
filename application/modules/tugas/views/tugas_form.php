@@ -16,7 +16,7 @@
                         <h3 class="card-title"><?=$c_judul?></h3>
                         <div class="col-md-4">
                             <a href="<?php echo base_url('tugas')?>" class="btn btn-primary">Tugas Jabatan</a> &nbsp;
-                            <a href="<?php echo base_url('tugas/tugas_harian')?>" class="btn btn-primary">Tugas Harian</a>
+                            <a href="<?php echo base_url('tugas/tugas_tambahan')?>" class="btn btn-primary">Tugas Tambahan</a>
                         </div> 
                     </div>
                 
@@ -51,13 +51,13 @@
                                     <span style="color:red;" class="tanggal"><?php echo form_error('tanggal')?></span>
                                 </div>
 
-                                <div>Jam mulai</div>
+                                <div>Jam</div>
                                 <div class="col-sm-2">
                                     <input type="time" name="start_time" value="" class="form-control">
                                     <span style="color:red;" class="start_time"><?php echo form_error('start_time')?></span>
                                 </div>
                                 
-                                <div>Jam selesai</div>
+                                <div> s/d</div>
                                 <div class="col-sm-2">
                                     <input type="time" name="end_time" value="" class="form-control" >
                                     <span style="color:red;" class="end_time"><?php echo form_error('end_time')?></span>

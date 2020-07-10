@@ -12,13 +12,17 @@ class Tugas_model extends CI_Model
 
     public function getSkpByUser($user_id)
     {
-        date_default_timezone_set('ASIA/JAKARTA');
-        $month = bulan(date('m'));
+        $bln = date('m');
+        $thn = date('Y');
+        $start = $thn.'-'.$bln.'-01';
+        $end = $thn.'-'.$bln.'-31';
+        $where = ['skp.tanggal >=' => $start, 'skp.tanggal <=' => $end ];
 
         $this->db->select('skp.*');
         $this->db->from('tb_skp skp');
         $this->db->join('tb_users tu', 'skp.user_id=tu.user_id');
-        $this->db->where('skp.user_id ='.$this->id.' AND month = "'.$month.'" ');
+        $this->db->where('skp.user_id ='.$this->id.' ');
+        $this->db->where($where);
         return $this->db->get()->result_array();
     }
 
@@ -63,7 +67,7 @@ class Tugas_model extends CI_Model
         );
     }
     
-    public function validation_rules_harian()
+    public function validation_rules_tambahan()
     {
         return array(
             array(
@@ -92,11 +96,6 @@ class Tugas_model extends CI_Model
                 'label' => 'Hasil'
             ),
             array(
-                'field' => 'volume',
-                'rules' => 'trim|required',
-                'label' => 'volume',
-            ),
-            array(
                 'field' => 'satuan',
                 'rules' => 'trim|required',
                 'label' => 'satuan'
@@ -117,11 +116,11 @@ class Tugas_model extends CI_Model
 
     public function insertTugas($data)
     {
-        return $this->db->insert('tb_tugas_skp', $data);
+        return $this->db->insert('tb_skp_realisasi', $data);
     }
 
     public function insertTambahan($data)
     {
-        return $this->db->insert('tb_tugas_tambahan', $data);
+        return $this->db->insert('tb_tugas_tambahan_staff', $data);
     }
 }

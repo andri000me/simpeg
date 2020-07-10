@@ -17,11 +17,11 @@
                         <h3 class="card-title"><?=$c_judul?></h3>
                         <div class="col-md-4">
                             <a href="<?php echo base_url('tugas')?>" class="btn btn-primary">Tugas Jabatan</a> &nbsp;
-                            <a href="<?php echo base_url('tugas/tugas_harian')?>" class="btn btn-primary">Tugas Harian</a>
+                            <a href="<?php echo base_url('tugas/tugas_tambahan')?>" class="btn btn-primary">Tugas Tambahan</a>
                         </div> 
                     </div>
                     <div class="card-body">
-                    <h3>Tugas Harian</h3>
+                    <h3>Tugas Tambahan</h3>
 
                     <form autocomplete="off" action="<?php echo base_url('tugas/saveTugasHarian')?>" class="form-horizontal" enctype="multipart/form-data" method="post">
                         <input type="hidden" id="id_harian" name="id_harian" value="" class="form-control">
@@ -30,7 +30,7 @@
                             <div class="col-sm-2">
                                 <div>Kegiatan</div>
                             </div>
-                            <div class="col-sm-9">
+                            <div class="col-sm-8">
                                 <input type="text" name="kegiatan" id="kegiatan" value="" class="form-control">
                                 <span style="color:red;" class="kegiatan"><?php echo form_error('kegiatan')?></span>
                             </div>
@@ -39,20 +39,20 @@
 
                         <div class="row sectionRow">
                             <div class="col-sm-2">
-                                <div>Tanggal dilaksanan</div>
+                                <div>Tanggal</div>
                             </div> 
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <input type="date" name="tanggal" value="" class="form-control">
                                 <span style="color:red;" class="tanggal"><?php echo form_error('tanggal')?></span>
                             </div>
 
-                            <div>Jam mulai</div>
+                            <div>Jam</div>
                             <div class="col-sm-2">
                                 <input type="time" name="start_time" value="" class="form-control">
                                 <span style="color:red;" class="start_time"><?php echo form_error('start_time')?></span>
                             </div>
                             
-                            <div>Jam selesai</div>
+                            <div>s/d</div>
                             <div class="col-sm-2">
                                 <input type="time" name="end_time" value="" class="form-control">
                                 <span style="color:red;" class="end_time"><?php echo form_error('end_time')?></span>
@@ -63,15 +63,9 @@
                         <div class="row sectionRow">
 
                             <div class="col-sm-2">
-                                <div>Volume</div>
+                                <div>Hasil (output)</div>
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" name="volume" id="volume" value="" class="form-control">
-                                <span style="color:red;" class="volume"><?php echo form_error('volume')?></span>
-                            </div>
-                           
-                            <div>Hasil (Output)</div>
-                            <div class="col-sm-3">
                                 <input type="text" name="output" id="output" value="" class="form-control">
                                 <span style="color:red;" class="output"><?php echo form_error('output')?></span>
                             </div>
@@ -88,7 +82,7 @@
                             <div class="col-sm-2">
                                 <div>Pemberi Tugas</div>
                             </div>
-                            <div class="col-sm-10">
+                            <div class="col-sm-8">
                                 <input type="text" name="pemberi_tugas" id="pemberi_tugas" value="" class="form-control">
                                 <span style="color:red;" class="pemberi_tugas"><?php echo form_error('pemberi_tugas')?></span>
                             </div>
